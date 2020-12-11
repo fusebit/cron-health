@@ -13,11 +13,9 @@ module.exports = async (ctx) => {
     } else {
         const payload = await storage.get();
         const lastExecution = payload && payload.data && payload.data.lastExecution;
-        if (Date.now() - lastExecution < 90000) {
-            // 90s = 60s execution frequency + 30s grace period
-            return { status: 200 };
-        } else {
-            return { status: 418 };
-        }
+        const delta = Date.now() - lastExecution;
+        // 90s = 60s execution frequency + 30s grace period
+        const status = delta < 90000 ? 200 : 418;
+        return { status, body: { status, delta, lastExecution } };
     }
 };
