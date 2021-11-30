@@ -7,7 +7,7 @@
     "author": "https://fusebit.io",
     "packageAs": "@fusebit/cron-health",
     "engines": {
-        "node": "10"
+        "node": "14"
     },
     "dependencies": {
         "@fusebit/add-on-sdk": "3.0.2",
